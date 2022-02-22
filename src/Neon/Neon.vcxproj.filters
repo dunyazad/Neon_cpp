@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Neon">
+      <UniqueIdentifier>{40c244e0-5506-4dbf-b411-1e6c7e9cd1d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Neon\ECS">
+      <UniqueIdentifier>{0de6c413-89ec-4508-b11f-7834c8d58ada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Neon\Graphics">
+      <UniqueIdentifier>{6dd55391-f332-4ad2-986b-f219bdc941d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Neon\ECS\Component">
+      <UniqueIdentifier>{48b09539-6179-4fac-a5d9-645d4e5be9af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Neon\ECS\System">
+      <UniqueIdentifier>{34af39e1-2aad-4422-b089-930bced4c585}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui">
+      <UniqueIdentifier>{64508321-15fe-4543-92b5-d8ff9562bdaa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="glad.c" />
+    <ClCompile Include="main_.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Neon\Neon.cpp">
+      <Filter>Neon</Filter>
+    </ClCompile>
+    <ClCompile Include="Neon\Window.cpp">
+      <Filter>Neon</Filter>
+    </ClCompile>
+    <ClCompile Include="Neon\ECS\Entity.cpp">
+      <Filter>Neon\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Neon\ECS\System.cpp">
+      <Filter>Neon\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Neon\ECS\Component\Animator.cpp">
+      <Filter>Neon\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Neon\ECS\Component\Camera.cpp">
+      <Filter>Neon\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Neon\ECS\Component\ComponentBase.cpp">
+      <Filter>Neon\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Neon\ECS\Component\Material.cpp">
+      <Filter>Neon\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Neon\ECS\Component\Mesh.cpp">
+      <Filter>Neon\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Neon\ECS\Component\MeshRenderer.cpp">
+      <Filter>Neon\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Neon\ECS\Component\Shader.cpp">
+      <Filter>Neon\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Neon\ECS\Component\Texture.cpp">
+      <Filter>Neon\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Neon\ECS\Component\Transform.cpp">
+      <Filter>Neon\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Neon\Graphics\GraphicsDevice.cpp">
+      <Filter>Neon\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inc\imgui\imgui.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inc\imgui\imgui_demo.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inc\imgui\imgui_draw.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inc\imgui\imgui_impl_glfw.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inc\imgui\imgui_impl_opengl3.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inc\imgui\imgui_tables.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\inc\imgui\imgui_widgets.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NeonCommon.h">
+      <Filter>Neon</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\ECS.h">
+      <Filter>Neon</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\Graphics.h">
+      <Filter>Neon</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\Neon.h">
+      <Filter>Neon</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\NeonCommon.h">
+      <Filter>Neon</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\Window.h">
+      <Filter>Neon</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\ECS\Component.h">
+      <Filter>Neon\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\ECS\Entity.h">
+      <Filter>Neon\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\ECS\System.h">
+      <Filter>Neon\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\ECS\Component\Animator.h">
+      <Filter>Neon\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\ECS\Component\Camera.h">
+      <Filter>Neon\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\ECS\Component\ComponentBase.h">
+      <Filter>Neon\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\ECS\Component\Material.h">
+      <Filter>Neon\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\ECS\Component\Mesh.h">
+      <Filter>Neon\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\ECS\Component\MeshRenderer.h">
+      <Filter>Neon\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\ECS\Component\Shader.h">
+      <Filter>Neon\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\ECS\Component\Texture.h">
+      <Filter>Neon\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\ECS\Component\Transform.h">
+      <Filter>Neon\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\Graphics\Buffer.hpp">
+      <Filter>Neon\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\Graphics\GraphicsDevice.h">
+      <Filter>Neon\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\imgui\imconfig.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\imgui\imgui.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\imgui\imgui_impl_glfw.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\imgui\imgui_impl_opengl3.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\imgui\imgui_internal.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\imgui\imstb_rectpack.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\imgui\imstb_textedit.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\imgui\imstb_truetype.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
