@@ -107,6 +107,8 @@ void Neon::Frame()
 
 NeEntityBase* Neon::CreateEntity()
 {
+	this->registry.create();
+
 	auto entity = new NeEntityBase();
 	this->entities.push_back(entity);
 	return entity;

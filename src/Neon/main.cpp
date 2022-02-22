@@ -25,15 +25,15 @@ int main () {
 		auto mesh = neon.CreateComponent<NeMeshComponent>();
 		ent->AddComponent(mesh);
 		{
-			mesh->GetVertexBuffer()->AppendData(glm::vec3(-0.05f, -0.05f, 0.0f));
-			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.0f, -0.05f, 0.0f));
-			mesh->GetVertexBuffer()->AppendData(glm::vec3(-0.05f, 0.05f, 0.0f));
-			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.0f, 0.05f, 0.0f));
+			mesh->GetVertexBuffer()->AppendData(glm::vec3(-0.5f, -0.5f, 0.0f));
+			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.0f, -0.5f, 0.0f));
+			mesh->GetVertexBuffer()->AppendData(glm::vec3(-0.5f, 0.5f, 0.0f));
+			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.0f, 0.5f, 0.0f));
 
-			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.0f, -0.05f, 0.0f));
-			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.05f, -0.05f, 0.0f));
-			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.0f, 0.05f, 0.0f));
-			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.05f, 0.05f, 0.0f));
+			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.0f, -0.5f, 0.0f));
+			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.5f, -0.5f, 0.0f));
+			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.0f, 0.5f, 0.0f));
+			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.5f, 0.5f, 0.0f));
 
 			mesh->GetColorBuffer()->AppendData(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 			mesh->GetColorBuffer()->AppendData(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
@@ -111,16 +111,16 @@ int main () {
 			static double elapsed = 0.0f;
 			elapsed += timeDelta;
 			glm::mat4 m = glm::identity<glm::mat4>();
-			m = glm::translate(m, glm::vec3(sinf(glm::radians(elapsed * 0.02f)), 0, 0));
+			m = glm::translate(m, glm::vec3(sinf(glm::radians((float)elapsed * 0.02f)), 0, 0));
 			transform->SetLocalMatrix(m);
 			});
 
 		auto mesh = neon.CreateComponent<NeMeshComponent>();
 		ent->AddComponent(mesh);
 		{
-			mesh->GetVertexBuffer()->AppendData(glm::vec3(-0.05f, -0.05f, 0.0f));
-			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.05f, -0.05f, 0.0f));
-			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.0f, 0.05f, 0.0f));
+			mesh->GetVertexBuffer()->AppendData(glm::vec3(-0.5f, -0.5f, 0.0f));
+			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.5f, -0.5f, 0.0f));
+			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.0f, 0.5f, 0.0f));
 
 			mesh->GetColorBuffer()->AppendData(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
 			mesh->GetColorBuffer()->AppendData(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));

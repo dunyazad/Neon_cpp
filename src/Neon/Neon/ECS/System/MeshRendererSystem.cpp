@@ -1,4 +1,5 @@
 #include <Neon/ECS/System/MeshRendererSystem.h>
+#include <Neon/ECS/Component.h>
 #include <Neon/Neon.h>
 
 NeMeshRendererSystem::NeMeshRendererSystem(Neon* neon)

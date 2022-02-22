@@ -108,9 +108,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NeonCommon.h">
-      <Filter>Neon</Filter>
-    </ClInclude>
     <ClInclude Include="Neon\ECS.h">
       <Filter>Neon</Filter>
     </ClInclude>

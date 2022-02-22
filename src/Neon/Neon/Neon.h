@@ -5,6 +5,24 @@
 #include <Neon/ECS.h>
 #include <Neon/Graphics.h>
 
+class NeEntity
+{
+public:
+	NeEntity(entt::entity handle, const string& name)
+		: entityHandle(handle), name(name)
+	{
+	}
+
+	~NeEntity()
+	{
+	}
+
+private:
+	entt::entity entityHandle = entt::entity();
+	string name = "";
+};
+
+
 class Neon
 {
 public:
@@ -41,6 +59,8 @@ public:
 
 private:
 	NeWindow* window = nullptr;
+
+	entt::registry registry;
 
 	map<string, vector<NeComponentBase*>> components;
 	vector<NeEntityBase*> entities;

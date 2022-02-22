@@ -198,7 +198,6 @@
     <ClInclude Include="..\..\inc\imgui\imstb_rectpack.h" />
     <ClInclude Include="..\..\inc\imgui\imstb_textedit.h" />
     <ClInclude Include="..\..\inc\imgui\imstb_truetype.h" />
-    <ClInclude Include="NeonCommon.h" />
     <ClInclude Include="Neon\ECS.h" />
     <ClInclude Include="Neon\ECS\Component.h" />
     <ClInclude Include="Neon\ECS\Component\AnimatorComponent.h" />
