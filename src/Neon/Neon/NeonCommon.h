@@ -3,6 +3,8 @@
 #pragma warning(disable : 4061 4191 4201 4365 4464 4514 4582 4623 4625 4626 4668 4710 4819 4820 4996 5027 5039 5045)
 
 #include <chrono>
+#include <filesystem>
+#include <fstream>
 #include <functional>
 #include <iostream>
 #include <list>

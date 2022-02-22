@@ -1,5 +1,5 @@
-#include <Neon/ECS/Component/Material.h>
-#include <Neon/ECS/Component/Shader.h>
+#include <Neon/ECS/Component/MaterialComponent.h>
+#include <Neon/ECS/Component/ShaderComponent.h>
 
 NeMaterialComponent::NeMaterialComponent()
 	: NeComponentBase()

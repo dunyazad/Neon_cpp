@@ -37,34 +37,31 @@
     <ClCompile Include="Neon\ECS\Entity.cpp">
       <Filter>Neon\ECS</Filter>
     </ClCompile>
-    <ClCompile Include="Neon\ECS\System.cpp">
-      <Filter>Neon\ECS</Filter>
-    </ClCompile>
-    <ClCompile Include="Neon\ECS\Component\Animator.cpp">
+    <ClCompile Include="Neon\ECS\Component\AnimatorComponent.cpp">
       <Filter>Neon\ECS\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Neon\ECS\Component\Camera.cpp">
+    <ClCompile Include="Neon\ECS\Component\CameraComponent.cpp">
       <Filter>Neon\ECS\Component</Filter>
     </ClCompile>
     <ClCompile Include="Neon\ECS\Component\ComponentBase.cpp">
       <Filter>Neon\ECS\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Neon\ECS\Component\Material.cpp">
+    <ClCompile Include="Neon\ECS\Component\MaterialComponent.cpp">
       <Filter>Neon\ECS\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Neon\ECS\Component\Mesh.cpp">
+    <ClCompile Include="Neon\ECS\Component\MeshComponent.cpp">
       <Filter>Neon\ECS\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Neon\ECS\Component\MeshRenderer.cpp">
+    <ClCompile Include="Neon\ECS\Component\MeshRendererComponent.cpp">
       <Filter>Neon\ECS\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Neon\ECS\Component\Shader.cpp">
+    <ClCompile Include="Neon\ECS\Component\ShaderComponent.cpp">
       <Filter>Neon\ECS\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Neon\ECS\Component\Texture.cpp">
+    <ClCompile Include="Neon\ECS\Component\TextureComponent.cpp">
       <Filter>Neon\ECS\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Neon\ECS\Component\Transform.cpp">
+    <ClCompile Include="Neon\ECS\Component\TransformComponent.cpp">
       <Filter>Neon\ECS\Component</Filter>
     </ClCompile>
     <ClCompile Include="Neon\Graphics\GraphicsDevice.cpp">
@@ -90,6 +87,24 @@
     </ClCompile>
     <ClCompile Include="..\..\inc\imgui\imgui_widgets.cpp">
       <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Neon\ECS\System\AnimationSystem.cpp">
+      <Filter>Neon\ECS\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Neon\ECS\System\CameraSystem.cpp">
+      <Filter>Neon\ECS\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Neon\ECS\System\MeshSystem.cpp">
+      <Filter>Neon\ECS\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Neon\ECS\System\MeshRendererSystem.cpp">
+      <Filter>Neon\ECS\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Neon\ECS\System\SystemBase.cpp">
+      <Filter>Neon\ECS\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Neon\ECS\System\TransformSystem.cpp">
+      <Filter>Neon\ECS\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -120,31 +135,31 @@
     <ClInclude Include="Neon\ECS\System.h">
       <Filter>Neon\ECS</Filter>
     </ClInclude>
-    <ClInclude Include="Neon\ECS\Component\Animator.h">
+    <ClInclude Include="Neon\ECS\Component\AnimatorComponent.h">
       <Filter>Neon\ECS\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Neon\ECS\Component\Camera.h">
+    <ClInclude Include="Neon\ECS\Component\CameraComponent.h">
       <Filter>Neon\ECS\Component</Filter>
     </ClInclude>
     <ClInclude Include="Neon\ECS\Component\ComponentBase.h">
       <Filter>Neon\ECS\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Neon\ECS\Component\Material.h">
+    <ClInclude Include="Neon\ECS\Component\MaterialComponent.h">
       <Filter>Neon\ECS\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Neon\ECS\Component\Mesh.h">
+    <ClInclude Include="Neon\ECS\Component\MeshComponent.h">
       <Filter>Neon\ECS\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Neon\ECS\Component\MeshRenderer.h">
+    <ClInclude Include="Neon\ECS\Component\MeshRendererComponent.h">
       <Filter>Neon\ECS\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Neon\ECS\Component\Shader.h">
+    <ClInclude Include="Neon\ECS\Component\ShaderComponent.h">
       <Filter>Neon\ECS\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Neon\ECS\Component\Texture.h">
+    <ClInclude Include="Neon\ECS\Component\TextureComponent.h">
       <Filter>Neon\ECS\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Neon\ECS\Component\Transform.h">
+    <ClInclude Include="Neon\ECS\Component\TransformComponent.h">
       <Filter>Neon\ECS\Component</Filter>
     </ClInclude>
     <ClInclude Include="Neon\Graphics\Buffer.hpp">
@@ -176,6 +191,24 @@
     </ClInclude>
     <ClInclude Include="..\..\inc\imgui\imstb_truetype.h">
       <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\ECS\System\AnimationSystem.h">
+      <Filter>Neon\ECS\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\ECS\System\CameraSystem.h">
+      <Filter>Neon\ECS\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\ECS\System\MeshSystem.h">
+      <Filter>Neon\ECS\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\ECS\System\MeshRendererSystem.h">
+      <Filter>Neon\ECS\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\ECS\System\SystemBase.h">
+      <Filter>Neon\ECS\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Neon\ECS\System\TransformSystem.h">
+      <Filter>Neon\ECS\System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

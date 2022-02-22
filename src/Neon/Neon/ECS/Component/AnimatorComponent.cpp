@@ -1,4 +1,4 @@
-#include <Neon/ECS/Component/Animator.h>
+#include <Neon/ECS/Component/AnimatorComponent.h>
 
 NeAnimatorComponent::NeAnimatorComponent()
 	: NeComponentBase()

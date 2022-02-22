@@ -1,4 +1,4 @@
-#include <Neon/ECS/Component/Transform.h>
+#include <Neon/ECS/Component/TransformComponent.h>
 
 NeTransformComponent::NeTransformComponent()
 	: NeComponentBase()

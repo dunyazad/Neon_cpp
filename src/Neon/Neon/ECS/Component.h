@@ -1,10 +1,10 @@
 #pragma once
 
 #include <Neon/ECS/Component/ComponentBase.h>
-#include <Neon/ECS/Component/Transform.h>
-#include <Neon/ECS/Component/Mesh.h>
-#include <Neon/ECS/Component/Shader.h>
-#include <Neon/ECS/Component/Texture.h>
-#include <Neon/ECS/Component/Material.h>
-#include <Neon/ECS/Component/MeshRenderer.h>
-#include <Neon/ECS/Component/Animator.h>
+#include <Neon/ECS/Component/TransformComponent.h>
+#include <Neon/ECS/Component/MeshComponent.h>
+#include <Neon/ECS/Component/ShaderComponent.h>
+#include <Neon/ECS/Component/TextureComponent.h>
+#include <Neon/ECS/Component/MaterialComponent.h>
+#include <Neon/ECS/Component/MeshRendererComponent.h>
+#include <Neon/ECS/Component/AnimatorComponent.h>

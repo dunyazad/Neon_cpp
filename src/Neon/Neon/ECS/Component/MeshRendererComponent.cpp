@@ -1,4 +1,4 @@
-#include <Neon/ECS/Component/MeshRenderer.h>
+#include <Neon/ECS/Component/MeshRendererComponent.h>
 
 NeMeshRendererComponent::NeMeshRendererComponent()
 	: NeComponentBase()

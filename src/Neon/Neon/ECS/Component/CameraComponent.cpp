@@ -1,4 +1,4 @@
-#include <Neon/ECS/Component/Camera.h>
+#include <Neon/ECS/Component/CameraComponent.h>
 
 NeCameraComponent::NeCameraComponent()
 	: NeComponentBase()

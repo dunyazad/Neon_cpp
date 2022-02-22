@@ -19,12 +19,20 @@ public:
 	inline void SetGeometryShaderCode(const string& code) { this->geometryShaderCode = code; }
 	inline void SetFragmentShaderCode(const string& code) { this->fragmentShaderCode = code; }
 
+	inline void SetVertexShaderFile(const string& file) { this->vertexShaderFile = file; }
+	inline void SetGeometryShaderFile(const string& file) { this->geometryShaderFile = file; }
+	inline void SetFragmentShaderFile(const string& file) { this->fragmentShaderFile = file; }
+
 	inline unsigned int GetShaderProgramID() const { return this->shaderProgramID; }
 
 private:
 	string vertexShaderCode;
 	string geometryShaderCode;
 	string fragmentShaderCode;
+
+	string vertexShaderFile;
+	string geometryShaderFile;
+	string fragmentShaderFile;
 
 	unsigned int shaderProgramID = UINT_MAX;
 	unsigned int vertexShaderID = UINT_MAX;

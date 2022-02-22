@@ -1,4 +1,4 @@
-#include <Neon/ECS/Component/Shader.h>
+#include <Neon/ECS/Component/ShaderComponent.h>
 
 NeShaderComponent::NeShaderComponent()
 	: NeComponentBase()
@@ -11,6 +11,18 @@ NeShaderComponent::~NeShaderComponent()
 
 bool NeShaderComponent::Build()
 {
+	if (this->vertexShaderFile.empty() == false)
+	{
+		ifstream ifs;
+		ifs.open(this->vertexShaderFile, ios_base::in);
+		if (ifs.is_open() == false) {
+			SPDLOG_CRITICAL("Could not open the file - {}'", this->vertexShaderFile);
+			return false;
+		}
+
+		this->vertexShaderCode = string((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+	}
+
 	if (this->vertexShaderCode.empty() == false)
 	{
 		this->vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
@@ -29,6 +41,18 @@ bool NeShaderComponent::Build()
 		}
 	}
 
+	if (this->geometryShaderFile.empty() == false)
+	{
+		ifstream ifs;
+		ifs.open(this->geometryShaderFile, ios_base::in);
+		if (ifs.is_open() == false) {
+			SPDLOG_CRITICAL("Could not open the file - {}'", this->geometryShaderFile);
+			return false;
+		}
+
+		this->geometryShaderCode = string((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+	}
+
 	if (this->geometryShaderCode.empty() == false)
 	{
 		this->geometryShaderID = glCreateShader(GL_GEOMETRY_SHADER);
@@ -45,6 +69,18 @@ bool NeShaderComponent::Build()
 			std::cout << "ERROR::SHADER::GEOMETRY::COMPILATION_FAILED\n" << infoLog << std::endl;
 			return false;
 		}
+	}
+
+	if (this->fragmentShaderFile.empty() == false)
+	{
+		ifstream ifs;
+		ifs.open(this->fragmentShaderFile, ios_base::in);
+		if (ifs.is_open() == false) {
+			SPDLOG_CRITICAL("Could not open the file - {}'", this->fragmentShaderFile);
+			return false;
+		}
+
+		this->fragmentShaderCode = string((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
 	}
 
 	if (this->fragmentShaderCode.empty() == false)

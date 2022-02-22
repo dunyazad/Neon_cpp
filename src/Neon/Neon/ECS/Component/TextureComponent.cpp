@@ -1,4 +1,4 @@
-#include <Neon/ECS/Component/Texture.h>
+#include <Neon/ECS/Component/TextureComponent.h>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>

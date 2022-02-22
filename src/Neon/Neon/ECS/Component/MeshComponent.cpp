@@ -1,4 +1,4 @@
-#include <Neon/ECS/Component/Mesh.h>
+#include <Neon/ECS/Component/MeshComponent.h>
 #include <Neon/Graphics/Buffer.hpp>
 
 NeMeshComponent::NeMeshComponent()
