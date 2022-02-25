@@ -42,6 +42,8 @@ bool NeWindow::Create(unsigned int width, unsigned int height, const char* title
 
 void NeWindow::RunLoop()
 {
+	this->neon->OnInitialize();
+
 	bool demoWindow = true;
 
 	while (!glfwWindowShouldClose(this->windowHandle)) {
@@ -62,10 +64,14 @@ void NeWindow::RunLoop()
 		glViewport(0, 0, display_w, display_h);
 		glfwSwapBuffers(this->windowHandle);
 	}
+
+	this->neon->OnTerminate();
 }
 
 void NeWindow::RunLoop(std::function<void()> onUpdate)
 {
+	this->neon->OnInitialize();
+
 	bool demoWindow = true;
 
 	while (!glfwWindowShouldClose(this->windowHandle)) {
@@ -90,6 +96,8 @@ void NeWindow::RunLoop(std::function<void()> onUpdate)
 		glViewport(0, 0, display_w, display_h);
 		glfwSwapBuffers(this->windowHandle);
 	}
+
+	this->neon->OnTerminate();
 }
 
 void NeWindow::DestroyWindow() {

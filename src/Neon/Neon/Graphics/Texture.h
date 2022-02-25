@@ -1,13 +1,12 @@
 #pragma once
 
 #include <Neon/NeonCommon.h>
-#include <Neon/ECS/Component/ComponentBase.h>
 
-class NeTextureComponent : public NeComponentBase
+class NeTexture
 {
 public:
-	NeTextureComponent();
-	virtual ~NeTextureComponent();
+	NeTexture();
+	virtual ~NeTexture();
 
 	void Bind();
 	void Unbind();

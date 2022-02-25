@@ -1,22 +1,21 @@
-#include <Neon/ECS/Component/ShaderComponent.h>
+#include <Neon/Graphics/Shader.h>
 
-NeShaderComponent::NeShaderComponent()
-	: NeComponentBase()
+NeShader::NeShader()
 {
 }
 
-NeShaderComponent::~NeShaderComponent()
+NeShader::~NeShader()
 {
 }
 
-bool NeShaderComponent::Build()
+bool NeShader::Build()
 {
-	if (this->vertexShaderFile.empty() == false)
+	if (this->vertexShaderFileName.empty() == false)
 	{
 		ifstream ifs;
-		ifs.open(this->vertexShaderFile, ios_base::in);
+		ifs.open(this->vertexShaderFileName, ios_base::in);
 		if (ifs.is_open() == false) {
-			SPDLOG_CRITICAL("Could not open the file - {}'", this->vertexShaderFile);
+			SPDLOG_CRITICAL("Could not open the file - {}'", this->vertexShaderFileName);
 			return false;
 		}
 
@@ -29,7 +28,7 @@ bool NeShaderComponent::Build()
 		const char* c_str = this->vertexShaderCode.c_str();
 		glShaderSource(this->vertexShaderID, 1, &c_str, nullptr);
 		glCompileShader(this->vertexShaderID);
-		
+
 		int success;
 		char infoLog[512];
 		glGetShaderiv(this->vertexShaderID, GL_COMPILE_STATUS, &success);
@@ -41,12 +40,12 @@ bool NeShaderComponent::Build()
 		}
 	}
 
-	if (this->geometryShaderFile.empty() == false)
+	if (this->geometryShaderFileName.empty() == false)
 	{
 		ifstream ifs;
-		ifs.open(this->geometryShaderFile, ios_base::in);
+		ifs.open(this->geometryShaderFileName, ios_base::in);
 		if (ifs.is_open() == false) {
-			SPDLOG_CRITICAL("Could not open the file - {}'", this->geometryShaderFile);
+			SPDLOG_CRITICAL("Could not open the file - {}'", this->geometryShaderFileName);
 			return false;
 		}
 
@@ -71,12 +70,12 @@ bool NeShaderComponent::Build()
 		}
 	}
 
-	if (this->fragmentShaderFile.empty() == false)
+	if (this->fragmentShaderFileName.empty() == false)
 	{
 		ifstream ifs;
-		ifs.open(this->fragmentShaderFile, ios_base::in);
+		ifs.open(this->fragmentShaderFileName, ios_base::in);
 		if (ifs.is_open() == false) {
-			SPDLOG_CRITICAL("Could not open the file - {}'", this->fragmentShaderFile);
+			SPDLOG_CRITICAL("Could not open the file - {}'", this->fragmentShaderFileName);
 			return false;
 		}
 
@@ -115,7 +114,7 @@ bool NeShaderComponent::Build()
 		glAttachShader(this->shaderProgramID, this->fragmentShaderID);
 	}
 	glLinkProgram(this->shaderProgramID);
-	
+
 	int success;
 	char infoLog[512];
 	glGetProgramiv(this->shaderProgramID, GL_LINK_STATUS, &success);
@@ -181,12 +180,12 @@ bool NeShaderComponent::Build()
 	return true;
 }
 
-void NeShaderComponent::Use()
+void NeShader::Use()
 {
 	glUseProgram(this->shaderProgramID);
 }
 
-bool NeShaderComponent::SetUniformMatrix4(const string& name, const glm::mat4& m)
+bool NeShader::SetUniformMatrix4(const string& name, const glm::mat4& m)
 {
 	if (this->uniformNameIndexTable.count(name) == 0)
 	{

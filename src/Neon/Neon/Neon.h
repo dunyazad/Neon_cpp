@@ -2,26 +2,10 @@
 
 #include <Neon/NeonCommon.h>
 #include <Neon/Window.h>
-#include <Neon/ECS.h>
 #include <Neon/Graphics.h>
 
-class NeEntity
-{
-public:
-	NeEntity(entt::entity handle, const string& name)
-		: entityHandle(handle), name(name)
-	{
-	}
-
-	~NeEntity()
-	{
-	}
-
-private:
-	entt::entity entityHandle = entt::entity();
-	string name = "";
-};
-
+#include <Neon/Component.h>
+#include <Neon/System.h>
 
 class Neon
 {
@@ -30,41 +14,44 @@ public:
 	~Neon();
 
 	bool CreateNeonWindow(unsigned int width, unsigned int height, const char* title);
+	void OnInitialize();
+	void OnTerminate();
 	void Frame();
 
-	NeEntityBase* CreateEntity();
+	NeEntity CreateEntity(const string& name);
 
-	template<typename T>
-	vector<NeComponentBase*> GetComponents()
+	NeMesh* GetOrCreateMesh(const string& name);
+	NeShader* GetOrCreateShader(const string& name);
+	NeTexture* GetOrCreateTexture(const string& name);
+	NeMaterial* GetOrCreateMaterial(const string& name);
+
+	template <typename T, typename... Args>
+	T& CreateComponent(NeEntity entity, Args&&... args)
 	{
-		if (this->components.count(typeid(T).name()) != 0)
-		{
-			return this->components[typeid(T).name()];
-		}
-		else
-		{
-			return vector<NeComponentBase*>();
-		}
+		return this->registry.emplace<T>(entity, std::forward<Args>(args)...);
 	}
 
 	template<typename T>
-	T* CreateComponent()
+	T& GetComponents(NeEntity entity)
 	{
-		auto component = new T();
-		this->components[typeid(T).name()].push_back(component);
-		return component;
+		return this->registry.get<T>(entity);
 	}
 
 	inline NeWindow* GetWindow() const { return this->window; }
+	inline entt::registry& GetRegistry() { return this->registry; }
 
 private:
 	NeWindow* window = nullptr;
 
 	entt::registry registry;
+	NeTransformSystem transformSystem;
+	NeAnimatorSystem animatorSystem;
+	NeMeshRendererSystem meshRendererSystem;
 
-	map<string, vector<NeComponentBase*>> components;
-	vector<NeEntityBase*> entities;
-	vector<NeSystemBase*> systems;
+	map<string, NeMesh*> meshes;
+	map<string, NeShader*> shaders;
+	map<string, NeTexture*> textures;
+	map<string, NeMaterial*> materials;
 
 	chrono::system_clock::time_point lastTime;
 	double accumulatedTime = 0.0;

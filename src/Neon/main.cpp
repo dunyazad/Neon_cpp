@@ -7,128 +7,33 @@ int main () {
 	// Use this to disable VSync (not advized)
 	//glfwSwapInterval(0);
 
-
 	{
-		auto ent = neon.CreateEntity();
+		auto ent = neon.CreateEntity("triangle");
 
-		auto transform = neon.CreateComponent<NeTransformComponent>();
-		ent->AddComponent(transform);
+		auto& transform = neon.CreateComponent<NeTransformComponent>(ent);
+		transform.localTransform = glm::translate(transform.localTransform, glm::vec3(0.0f, 0.1f, 0.0f));
 
-		auto animator = neon.CreateComponent<NeAnimatorComponent>();
-		animator->SetTransform(transform);
-		animator->AddUpdateCallback([](NeTransformComponent* transform, long frameNumber, double timeDelta) {
-			auto m = transform->GetLocalTransform();
-			m = glm::rotate(m, glm::radians((float)timeDelta) * 0.1f, glm::vec3(0, 0, 1));
-			transform->SetLocalMatrix(m);
-			});
-
-		auto mesh = neon.CreateComponent<NeMeshComponent>();
-		ent->AddComponent(mesh);
-		{
-			mesh->GetVertexBuffer()->AppendData(glm::vec3(-0.5f, -0.5f, 0.0f));
-			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.0f, -0.5f, 0.0f));
-			mesh->GetVertexBuffer()->AppendData(glm::vec3(-0.5f, 0.5f, 0.0f));
-			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.0f, 0.5f, 0.0f));
-
-			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.0f, -0.5f, 0.0f));
-			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.5f, -0.5f, 0.0f));
-			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.0f, 0.5f, 0.0f));
-			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.5f, 0.5f, 0.0f));
-
-			mesh->GetColorBuffer()->AppendData(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
-			mesh->GetColorBuffer()->AppendData(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-			mesh->GetColorBuffer()->AppendData(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
-			mesh->GetColorBuffer()->AppendData(glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
-
-			mesh->GetColorBuffer()->AppendData(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
-			mesh->GetColorBuffer()->AppendData(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-			mesh->GetColorBuffer()->AppendData(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
-			mesh->GetColorBuffer()->AppendData(glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
-
-			mesh->GetTexCoordBuffer()->AppendData(glm::vec2(0.0f, 0.0f));
-			mesh->GetTexCoordBuffer()->AppendData(glm::vec2(0.5f, 0.0f));
-			mesh->GetTexCoordBuffer()->AppendData(glm::vec2(0.0f, 0.5f));
-			mesh->GetTexCoordBuffer()->AppendData(glm::vec2(0.5f, 0.5f));
-
-			mesh->GetTexCoordBuffer()->AppendData(glm::vec2(0.0f, 0.0f));
-			mesh->GetTexCoordBuffer()->AppendData(glm::vec2(0.5f, 0.0f));
-			mesh->GetTexCoordBuffer()->AppendData(glm::vec2(0.0f, 0.5f));
-			mesh->GetTexCoordBuffer()->AppendData(glm::vec2(0.5f, 0.5f));
-
-			mesh->GetIndexBuffer()->AppendData(0);
-			mesh->GetIndexBuffer()->AppendData(1);
-			mesh->GetIndexBuffer()->AppendData(2);
-			mesh->GetIndexBuffer()->AppendData(3);
-			mesh->GetIndexBuffer()->AppendData(2);
-			mesh->GetIndexBuffer()->AppendData(1);
-
-			mesh->GetIndexBuffer()->AppendData(4);
-			mesh->GetIndexBuffer()->AppendData(5);
-			mesh->GetIndexBuffer()->AppendData(6);
-			mesh->GetIndexBuffer()->AppendData(7);
-			mesh->GetIndexBuffer()->AppendData(6);
-			mesh->GetIndexBuffer()->AppendData(5);
-
-			mesh->Refresh();
-		}
-
-		auto shader = neon.CreateComponent<NeShaderComponent>();
-		ent->AddComponent(shader);
-		shader->SetVertexShaderFile("../../res/shaders/texture/texture.vs");
-		shader->SetFragmentShaderFile("../../res/shaders/texture/texture.fs");
-		if (shader->Build() == false)
-		{
-			SPDLOG_CRITICAL("Failed to build shader");
-		}
-
-		auto texture = neon.CreateComponent<NeTextureComponent>();
-		ent->AddComponent(texture);
-		texture->LoadFromFile("../../res/images/grid.png", 4167, 4167);
-
-		auto material = neon.CreateComponent<NeMaterialComponent>();
-		ent->AddComponent(material);
-		material->SetShader(shader);
-		material->SetTexture(texture);
-
-		auto meshRenderer = neon.CreateComponent<NeMeshRendererComponent>();
-		ent->AddComponent(meshRenderer);
-		meshRenderer->SetTransform(transform);
-		meshRenderer->SetMesh(mesh);
-		meshRenderer->SetMaterial(material);
-	}
-	{
-		auto ent = neon.CreateEntity();
-
-		auto transform = neon.CreateComponent<NeTransformComponent>();
-		ent->AddComponent(transform);
-		glm::mat4 localMatrix = glm::identity<glm::mat4>();
-		localMatrix = glm::translate(localMatrix, glm::vec3(0.0f, 0.1f, 0.0f));
-		transform->SetLocalMatrix(localMatrix);
-
-		auto animator = neon.CreateComponent<NeAnimatorComponent>();
-		animator->SetTransform(transform);
-		animator->AddUpdateCallback([](NeTransformComponent* transform, long frameNumber, double timeDelta) {
+		auto& animator = neon.CreateComponent<NeAnimatorComponent>(ent);
+		animator.updateCallback = [](glm::mat4& localMatrix, long frameNumber, double timeDelta) {
 			static double elapsed = 0.0f;
 			elapsed += timeDelta;
 			glm::mat4 m = glm::identity<glm::mat4>();
-			m = glm::translate(m, glm::vec3(sinf(glm::radians((float)elapsed * 0.02f)), 0, 0));
-			transform->SetLocalMatrix(m);
-			});
+			localMatrix = glm::translate(m, glm::vec3(sinf(glm::radians((float)elapsed * 0.02f)), 0, 0));
+		};
 
-		auto mesh = neon.CreateComponent<NeMeshComponent>();
-		ent->AddComponent(mesh);
+		auto mesh = neon.GetOrCreateMesh("triangle mesh");
 		{
-			mesh->GetVertexBuffer()->AppendData(glm::vec3(-0.5f, -0.5f, 0.0f));
-			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.5f, -0.5f, 0.0f));
-			mesh->GetVertexBuffer()->AppendData(glm::vec3(0.0f, 0.5f, 0.0f));
+			mesh->GetVertexBuffer().AppendData(glm::vec3(-0.5f, -0.5f, 0.0f));
+			mesh->GetVertexBuffer().AppendData(glm::vec3(0.5f, -0.5f, 0.0f));
+			mesh->GetVertexBuffer().AppendData(glm::vec3(0.0f, 0.5f, 0.0f));
 
-			mesh->GetColorBuffer()->AppendData(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-			mesh->GetColorBuffer()->AppendData(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
-			mesh->GetColorBuffer()->AppendData(glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
+			mesh->GetColorBuffer().AppendData(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+			mesh->GetColorBuffer().AppendData(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
+			mesh->GetColorBuffer().AppendData(glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
 
-			mesh->GetIndexBuffer()->AppendData(0);
-			mesh->GetIndexBuffer()->AppendData(1);
-			mesh->GetIndexBuffer()->AppendData(2);
+			//mesh->GetIndexBuffer().AppendData(0);
+			//mesh->GetIndexBuffer().AppendData(1);
+			//mesh->GetIndexBuffer().AppendData(2);
 
 			mesh->Refresh();
 		}
@@ -152,30 +57,96 @@ int main () {
 			//"   FragColor = vCol;\n"
 			"}\n\0";
 
-		auto shader = neon.CreateComponent<NeShaderComponent>();
-		ent->AddComponent(shader);
+		auto shader = neon.GetOrCreateShader("triangle");
 		shader->SetVertexShaderCode(vertexShaderSource);
 		shader->SetFragmentShaderCode(fragmentShaderSource);
-		if (shader->Build() == false)
-		{
-			SPDLOG_CRITICAL("Failed to build shader");
-		}
+		shader->Build();
 
-		auto material = neon.CreateComponent<NeMaterialComponent>();
-		ent->AddComponent(material);
+		auto material = neon.GetOrCreateMaterial("triangle");
 		material->SetShader(shader);
 
-		auto meshRenderer = neon.CreateComponent<NeMeshRendererComponent>();
-		ent->AddComponent(meshRenderer);
-		meshRenderer->SetTransform(transform);
-		meshRenderer->SetMesh(mesh);
-		meshRenderer->SetMaterial(material);
+		auto& meshRenderer = neon.CreateComponent<NeMeshRendererComponent>(ent);
+		meshRenderer.renderInfoList[material].push_back(mesh);
+	}
+
+	{
+		auto ent = neon.CreateEntity("rectangle");
+
+		auto& transform = neon.CreateComponent<NeTransformComponent>(ent);
+		transform.localTransform = glm::identity<glm::mat4>();
+
+		auto& animator = neon.CreateComponent<NeAnimatorComponent>(ent);
+		animator.updateCallback = [](glm::mat4& localMatrix, long frameNumber, double timeDelta) {
+			localMatrix = glm::rotate(localMatrix, glm::radians((float)timeDelta) * 0.1f, glm::vec3(0, 0, 1));
+		};
+
+		auto mesh = neon.GetOrCreateMesh("rectangle mesh");
+		{
+			mesh->GetVertexBuffer().AppendData(glm::vec3(-0.5f, -0.5f, 0.0f));
+			mesh->GetVertexBuffer().AppendData(glm::vec3(0.0f, -0.5f, 0.0f));
+			mesh->GetVertexBuffer().AppendData(glm::vec3(-0.5f, 0.5f, 0.0f));
+			mesh->GetVertexBuffer().AppendData(glm::vec3(0.0f, 0.5f, 0.0f));
+
+			mesh->GetVertexBuffer().AppendData(glm::vec3(0.0f, -0.5f, 0.0f));
+			mesh->GetVertexBuffer().AppendData(glm::vec3(0.5f, -0.5f, 0.0f));
+			mesh->GetVertexBuffer().AppendData(glm::vec3(0.0f, 0.5f, 0.0f));
+			mesh->GetVertexBuffer().AppendData(glm::vec3(0.5f, 0.5f, 0.0f));
+
+			mesh->GetColorBuffer().AppendData(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+			mesh->GetColorBuffer().AppendData(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+			mesh->GetColorBuffer().AppendData(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
+			mesh->GetColorBuffer().AppendData(glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
+
+			mesh->GetColorBuffer().AppendData(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+			mesh->GetColorBuffer().AppendData(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+			mesh->GetColorBuffer().AppendData(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
+			mesh->GetColorBuffer().AppendData(glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
+
+			mesh->GetTexCoordBuffer().AppendData(glm::vec2(0.0f, 0.0f));
+			mesh->GetTexCoordBuffer().AppendData(glm::vec2(0.5f, 0.0f));
+			mesh->GetTexCoordBuffer().AppendData(glm::vec2(0.0f, 0.5f));
+			mesh->GetTexCoordBuffer().AppendData(glm::vec2(0.5f, 0.5f));
+
+			mesh->GetTexCoordBuffer().AppendData(glm::vec2(0.0f, 0.0f));
+			mesh->GetTexCoordBuffer().AppendData(glm::vec2(0.5f, 0.0f));
+			mesh->GetTexCoordBuffer().AppendData(glm::vec2(0.0f, 0.5f));
+			mesh->GetTexCoordBuffer().AppendData(glm::vec2(0.5f, 0.5f));
+
+			mesh->GetIndexBuffer().AppendData(0);
+			mesh->GetIndexBuffer().AppendData(1);
+			mesh->GetIndexBuffer().AppendData(2);
+			mesh->GetIndexBuffer().AppendData(3);
+			mesh->GetIndexBuffer().AppendData(2);
+			mesh->GetIndexBuffer().AppendData(1);
+
+			mesh->GetIndexBuffer().AppendData(4);
+			mesh->GetIndexBuffer().AppendData(5);
+			mesh->GetIndexBuffer().AppendData(6);
+			mesh->GetIndexBuffer().AppendData(7);
+			mesh->GetIndexBuffer().AppendData(6);
+			mesh->GetIndexBuffer().AppendData(5);
+
+			mesh->Refresh();
+		}
+
+		auto shader = neon.GetOrCreateShader("rectangle");
+		shader->SetVertexShaderFileName("../../res/shaders/texture/texture.vs");
+		shader->SetFragmentShaderFileName("../../res/shaders/texture/texture.fs");
+		shader->Build();
+
+		auto texture = neon.GetOrCreateTexture("grid");
+		texture->LoadFromFile("../../res/images/grid.png", 4167, 4167);
+
+		auto material = neon.GetOrCreateMaterial("rectangle");
+		material->SetShader(shader);
+		material->SetTexture(texture);
+
+		auto& meshRenderer = neon.CreateComponent<NeMeshRendererComponent>(ent);
+		meshRenderer.renderInfoList[material].push_back(mesh);
 	}
 
 //	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 //	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-
 
 
 

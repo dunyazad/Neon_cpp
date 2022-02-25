@@ -8,7 +8,7 @@ class NeBuffer
 public:
 	// bufferTarget : GL_ARRAY_BUFFER or GL_ELEMENT_ARRAY_BUFFER
 	// elementType : GL_BYTE or GL_UNSIGNED_BYTE or GL_SHORT or GL_UNSIGNED_SHORT or GL_INT or GL_UNSIGNED_INT of GL_FLOAT
-	NeBuffer(GLsizei bufferTarget = GL_ARRAY_BUFFER, GLenum elementType = GL_FLOAT)
+	NeBuffer(GLsizei bufferTarget, GLenum elementType)
 		: bufferTarget(bufferTarget), elementType(elementType)
 	{
 		switch (elementType)
@@ -90,31 +90,4 @@ protected:
 	GLenum elementType = GL_FLOAT;
 	GLint elementSize = 0;
 	vector<T> bufferData;
-};
-
-class NeVAO
-{
-public:
-	NeVAO()
-	{
-		glGenVertexArrays(1, &this->arrayID);
-	}
-
-	~NeVAO()
-	{
-		glGenVertexArrays(1, &this->arrayID);
-	}
-
-	void Bind()
-	{
-		glBindVertexArray(this->arrayID);
-	}
-
-	void Unbind()
-	{
-		glBindVertexArray(0);
-	}
-
-protected:
-	unsigned int arrayID = UINT_MAX;
 };

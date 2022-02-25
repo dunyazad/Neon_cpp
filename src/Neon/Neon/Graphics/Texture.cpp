@@ -1,32 +1,31 @@
-#include <Neon/ECS/Component/TextureComponent.h>
+#include <Neon/Graphics/Texture.h>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include <stb/stb_image_write.h>
 
-NeTextureComponent::NeTextureComponent()
-    : NeComponentBase()
+NeTexture::NeTexture()
 {
     glGenTextures(1, &this->textureID);
 }
 
-NeTextureComponent::~NeTextureComponent()
+NeTexture::~NeTexture()
 {
 	glDeleteTextures(1, &this->textureID);
 }
 
-void NeTextureComponent::Bind()
+void NeTexture::Bind()
 {
     glBindTexture(this->textureTargetID, this->textureID);
 }
 
-void NeTextureComponent::Unbind()
+void NeTexture::Unbind()
 {
     glBindTexture(this->textureTargetID, 0);
 }
 
-void NeTextureComponent::LoadFromFile(const string& filePath, int width, int height, GLenum textureTarget)
+void NeTexture::LoadFromFile(const string& filePath, int width, int height, GLenum textureTarget)
 {
     this->textureTargetID = textureTarget;
 

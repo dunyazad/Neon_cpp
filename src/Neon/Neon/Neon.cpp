@@ -1,6 +1,7 @@
 #include <Neon/Neon.h>
 
 Neon::Neon()
+	: transformSystem(&registry), animatorSystem(&registry), meshRendererSystem(&registry)
 {
 	glfwInit();
 
@@ -14,30 +15,11 @@ Neon::Neon()
 	}
 
 	std::cout << "OK" << std::endl;
-
-	auto animatorSystem = new NeAnimatorSystem(this);
-	this->systems.push_back(animatorSystem);
-
-	auto transformSystem = new NeTransformSystem(this);
-	this->systems.push_back(transformSystem);
-
-	auto meshSystem = new NeMeshSystem(this);
-	this->systems.push_back(meshSystem);
-
-	auto meshRendererSystem = new NeMeshRendererSystem(this);
-	this->systems.push_back(meshRendererSystem);
 }
 
 Neon::~Neon()
 {
-	for (auto& system : this->systems)
-	{
-		if (system != nullptr)
-		{
-			delete system;
-		}
-	}
-	this->systems.clear();
+	this->registry.clear();
 
 	glfwTerminate();
 }
@@ -62,6 +44,14 @@ bool Neon::CreateNeonWindow(unsigned int width, unsigned int height, const char*
 	lastTime = chrono::system_clock::now();
 	
 	return true;
+}
+
+void Neon::OnInitialize()
+{
+}
+
+void Neon::OnTerminate()
+{
 }
 
 void Neon::Frame()
@@ -89,27 +79,81 @@ void Neon::Frame()
 	glfwSetWindowTitle(GetWindow()->GetWindowHandle(), newTitle.c_str());
 
 
-	for (auto& system : this->systems)
-	{
-		system->Update(this->frameNumber, timeDelta);
-	}
+	//this->animatorSystem.Update(this->frameNumber, timeDelta);
+	this->transformSystem.Update(this->frameNumber, timeDelta);
 
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	for (auto& system : this->systems)
-	{
-		system->Render(this->frameNumber);
-	}
+	this->meshRendererSystem.Render(this->frameNumber);
+
+	//for (auto& system : this->systems)
+	//{
+	//	system->Render(this->frameNumber);
+	//}
 
 	this->frameNumber++;
 }
 
-NeEntityBase* Neon::CreateEntity()
+NeEntity Neon::CreateEntity(const string& name)
 {
-	this->registry.create();
-
-	auto entity = new NeEntityBase();
-	this->entities.push_back(entity);
+	auto entity = this->registry.create();
+	this->registry.emplace<NeNameComponent>(entity, name);
 	return entity;
+}
+
+NeMesh* Neon::GetOrCreateMesh(const string& name)
+{
+	if (this->meshes.count(name) != 0)
+	{
+		return this->meshes[name];
+	}
+	else
+	{
+		auto mesh = new NeMesh();
+		this->meshes[name] = mesh;
+		return mesh;
+	}
+}
+
+NeShader* Neon::GetOrCreateShader(const string& name)
+{
+	if (this->shaders.count(name) != 0)
+	{
+		return this->shaders[name];
+	}
+	else
+	{
+		auto shader = new NeShader();
+		this->shaders[name] = shader;
+		return shader;
+	}
+}
+
+NeTexture* Neon::GetOrCreateTexture(const string& name)
+{
+	if (this->textures.count(name) != 0)
+	{
+		return this->textures[name];
+	}
+	else
+	{
+		auto texture = new NeTexture();
+		this->textures[name] = texture;
+		return texture;
+	}
+}
+
+NeMaterial* Neon::GetOrCreateMaterial(const string& name)
+{
+	if (this->materials.count(name) != 0)
+	{
+		return this->materials[name];
+	}
+	else
+	{
+		auto material = new NeMaterial();
+		this->materials[name] = material;
+		return material;
+	}
 }
